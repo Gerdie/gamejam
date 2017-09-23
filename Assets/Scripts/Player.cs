@@ -12,7 +12,8 @@ public class Player : MonoBehaviour {
 	public Transform groundCheck;
 
 	private bool grounded;
-	private Animator anim;
+	public LayerMask groundLayer;
+//	private Animator anim;
 	private Rigidbody2D rb2d;
 
 	// Use this for initialization
@@ -20,16 +21,19 @@ public class Player : MonoBehaviour {
 		facingRight = true;
 		jump = false;
 		grounded = false;
-		anim = GetComponent<Animator>();
+//		anim = GetComponent<Animator>();
 		rb2d = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+//		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+//		grounded = Physics2D.Linecast(transform.position, groundCheck.position, groundLayer);
+		grounded = Physics2D.OverlapArea(groundCheck.position, groundCheck.position, groundLayer);
 
-		if (Input.GetButtonDown ("Jump") && grounded) {
+		print (grounded);
+		if (Input.GetKeyDown (KeyCode.Space) && grounded) {
 			jump = true;
 		}
 
@@ -39,7 +43,7 @@ public class Player : MonoBehaviour {
 
 		float h = Input.GetAxis("Horizontal");
 
-		anim.SetFloat("Speed", Mathf.Abs(h));
+//		anim.SetFloat("Speed", Mathf.Abs(h));
 
 		if (h * rb2d.velocity.x < maxSpeed)
 			rb2d.AddForce(Vector2.right * h * moveForce);
@@ -53,10 +57,13 @@ public class Player : MonoBehaviour {
 			Flip ();
 
 		if (jump) {
-			anim.SetTrigger("Jump");
+//			anim.SetTrigger("Jump");
 			rb2d.AddForce(new Vector2(0f, jumpForce));
 			jump = false;
 		}
+
+		groundCheck.transform.position = new Vector2(rb2d.position.x, rb2d.position.y);
+		print (groundCheck.transform.position.y);
 	}
 
 	void Flip () {
