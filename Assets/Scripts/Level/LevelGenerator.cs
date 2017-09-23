@@ -11,7 +11,7 @@ public class LevelGenerator : MonoBehaviour {
 	//list of pieces currently in the level
 	public List<LevelPiece> pieces = new List<LevelPiece>();
 
-	void Awake() = {
+	void Awake() {
 		instance = this;
 	}
 
@@ -30,7 +30,7 @@ public class LevelGenerator : MonoBehaviour {
 
 		//create a copy of the above random piece
 		LevelPiece newPiece = (LevelPiece)Instantiate(levelPrefabs[randomIndex]);
-		newPiece.transform.SetParent(this.transform, false);
+		//newPiece.transform.SetParent(this.transform, false);
 
 		Vector3 spawnPosition = Vector3.zero;
 
