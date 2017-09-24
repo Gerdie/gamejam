@@ -17,12 +17,16 @@ public class LevelGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		GenerateInitialPieces ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void GenerateInitialPieces(){
+		AddPiece ();
 	}
 
 	public void AddPiece(){
