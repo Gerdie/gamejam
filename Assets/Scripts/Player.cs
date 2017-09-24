@@ -12,6 +12,8 @@ public class Player : MonoBehaviour {
 	public Transform groundCheck;
 
 	private bool grounded;
+	private Vector2 pointA;
+	private Vector2 pointB;
 	public LayerMask groundLayer;
 //	private Animator anim;
 	private Rigidbody2D rb2d;
@@ -28,9 +30,11 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		pointA = new Vector2 (groundCheck.position.x, groundCheck.position.y);
+		pointB = new Vector2 (groundCheck.position.x, groundCheck.position.y);
 //		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 //		grounded = Physics2D.Linecast(transform.position, groundCheck.position, groundLayer);
-		grounded = Physics2D.OverlapArea(groundCheck.position, groundCheck.position, groundLayer);
+		grounded = Physics2D.OverlapArea(pointA, pointB, groundLayer);
 
 		print (grounded);
 		if (Input.GetKeyDown (KeyCode.Space) && grounded) {
