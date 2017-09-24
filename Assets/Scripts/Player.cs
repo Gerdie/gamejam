@@ -30,14 +30,17 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		pointA = new Vector2 (groundCheck.position.x, groundCheck.position.y);
-		pointB = new Vector2 (groundCheck.position.x, groundCheck.position.y);
+		pointA = new Vector2 (groundCheck.position.x + 3.93f, groundCheck.position.y + 3f);
+		pointB = new Vector2 (groundCheck.position.x - 3.93f, groundCheck.position.y - 4f);
 //		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 //		grounded = Physics2D.Linecast(transform.position, groundCheck.position, groundLayer);
-		grounded = Physics2D.OverlapArea(pointA, pointB, groundLayer);
+		if (Physics2D.OverlapArea(pointA, pointB, groundLayer) != null)
+			grounded = true;
 
+		print (pointA);
+		print (pointB);
 		print (grounded);
-		if (Input.GetKeyDown (KeyCode.Space) && grounded) {
+		if (Input.GetKeyDown (KeyCode.Space)) {
 			jump = true;
 		}
 
