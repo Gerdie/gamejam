@@ -22,7 +22,6 @@ public class LevelGenerator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	public void GenerateInitialPieces(){
@@ -44,5 +43,15 @@ public class LevelGenerator : MonoBehaviour {
 		} else {
 			spawnPosition = levelStartPoint.position;
 		}
+
+		newPiece.transform.position = spawnPosition;
+		pieces.Add (newPiece);
+	}
+
+	public void RemoveOldestPiece(){
+		LevelPiece oldestPiece = pieces [0];
+
+		pieces.Remove (oldestPiece);
+		Destroy (oldestPiece.gameObject);
 	}
 }
