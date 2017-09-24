@@ -45,4 +45,11 @@ public class LevelGenerator : MonoBehaviour {
 			spawnPosition = levelStartPoint.position;
 		}
 	}
+
+	public void RemoveOldestPiece(){
+		LevelPiece oldestPiece = pieces [0];
+
+		pieces.Remove (oldestPiece);
+		Destroy (oldestPiece.gameObject);
+	}
 }
